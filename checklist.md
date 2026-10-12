@@ -1,0 +1,39 @@
+# LegalEase Implementation Checklist
+
+- [x] Step 1: Analyze 25-page specification PDF (Extract all requirements, document types, scenarios, export specs)
+- [x] Step 2: Validate local Python environment and install missing dependencies (`python-docx`, `reportlab`)
+- [x] Step 3: Implement Backend Architecture
+  - [x] `backend/config.py` (configuration & environment management)
+  - [x] `backend/schemas.py` (Pydantic request/response models)
+  - [x] `backend/utils/text_utils.py` (character sanitization, markdown cleanup, filename helper)
+  - [x] `backend/ai_core/gemini_generator.py` (official `google.genai` SDK, anti-hallucination prompt, safe logging)
+  - [x] `backend/services/export_service.py` (TXT, professional DOCX with tables/headers/footers, PDF with ReportLab)
+  - [x] `backend/services/document_service.py` (core workflow orchestration)
+  - [x] `backend/routes.py` (FastAPI endpoints: `/`, `/health`, `/generate`, `/export/*`)
+  - [x] `backend/main.py` (FastAPI app, CORS, error handlers)
+- [x] Step 4: Implement Frontend (`frontend/app.py`)
+  - [x] Modern dark-navy glassmorphic UI with LegalEase branding & legal disclaimer
+  - [x] Dynamic form inputs (Document type presets + custom, parties, terms, date, jurisdiction, instructions)
+  - [x] Streamlit <-> FastAPI backend integration
+  - [x] Formatted document preview with preserve-formatting rendering
+  - [x] Edit Document functionality with session state persistence
+  - [x] One-click downloads for TXT, DOCX, and PDF with latest edited content
+- [x] Step 5: Test Suite (`tests/`)
+  - [x] Unit & integration tests for all endpoints (`/`, `/health`, `/generate`)
+  - [x] Validation tests (missing/invalid inputs)
+  - [x] Gemini service tests with mocking and error simulation
+  - [x] Exporter tests (TXT, DOCX, PDF file integrity)
+  - [x] Text sanitization & filename sanitization tests
+  - [x] Edited content persistence test
+  - [x] Optional live Gemini test
+- [x] Step 6: End-to-End Verification
+  - [x] Launch FastAPI and Streamlit servers
+  - [x] Test Scenarios 1, 2, 3 (Employment, NDA, Lease)
+  - [x] Verify generated TXT, DOCX, PDF files
+  - [x] Visual browser test via browser agent
+- [x] Step 7: Repository Finalization
+  - [x] `.gitignore`, `.env.example`, `requirements.txt`
+  - [x] Comprehensive `README.md`
+  - [x] Security audit (confirm no secrets committed)
+  - [x] Remove temporary files
+- [x] Step 8: Final Detailed Technical Report
